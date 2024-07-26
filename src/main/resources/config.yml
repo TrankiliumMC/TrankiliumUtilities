@@ -1,0 +1,9 @@
+ranks:
+  gui:
+    # Discount offered on ranks, in %
+    price:
+      divin: 60000
+      celeste: 80000
+      transcendant: 100000
+      vip: 13.99
+    vip-discount: 20

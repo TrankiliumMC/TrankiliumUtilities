@@ -1,0 +1,15 @@
+name: TrankiliumUtilities
+version: '${version}'
+main: fr.trankilium.trankiliumutilities.TrankiliumUtilities
+api-version: '1.21'
+depend: [Multiverse-Core, PlaceholderAPI]
+commands:
+  resetminage:
+    description: Réinitialise le monde "minage"
+    usage: /<command>
+    permission: worldreset.resetminage
+    permission-message: Vous n'avez pas la permission d'exécuter cette commande.
+  ranksgui:
+    description: Ouvre le GUI des grades pour le joueur spécifié.
+    usage: /ranksgui <joueur>
+    permission: op
