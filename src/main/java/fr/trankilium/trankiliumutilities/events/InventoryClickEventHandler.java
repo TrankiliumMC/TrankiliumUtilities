@@ -1,6 +1,7 @@
 package fr.trankilium.trankiliumutilities.events;
 
 import fr.trankilium.trankiliumutilities.globalUtils.ConfirmGUI;
+import fr.trankilium.trankiliumutilities.shops.GuiManagers;
 import fr.trankilium.trankiliumutilities.utilities.ranks.gui.RanksGUI;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -12,14 +13,19 @@ public class InventoryClickEventHandler implements Listener {
     @EventHandler
     public void inventoryClick(InventoryClickEvent event) {
         Inventory inventory = event.getInventory();
-        if (inventory.getHolder(false) instanceof RanksGUI) {
+        if (inventory.getHolder() instanceof RanksGUI) {
             RanksGUI.onClick(event);
-        } else if (inventory.getHolder(false) instanceof ConfirmGUI) {
+        } else if (inventory.getHolder() instanceof ConfirmGUI menu) {
             event.setCancelled(true);
-            ConfirmGUI menu = (ConfirmGUI) inventory.getHolder();
-            if (menu != null) {
-                menu.onClick(event.getSlot(), (Player) event.getWhoClicked());
-            }
+            menu.onClick(event.getSlot(), (Player) event.getWhoClicked());
+        }
+
+        if(inventory.getHolder() instanceof GuiManagers.ShopGui) {
+            GuiManagers.ShopGui.onClick(event);
+        }
+
+        if(inventory.getHolder() instanceof GuiManagers.CustomGui) {
+            GuiManagers.CustomGui.onClick(event);
         }
     }
 }

@@ -7,7 +7,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.jetbrains.annotations.NotNull;
 
-import static fr.trankilium.trankiliumutilities.TrankiliumUtilities.*;
+import static fr.trankilium.trankiliumutilities.Main.dbPath;
+import static fr.trankilium.trankiliumutilities.Main.logger;
+
 
 public class ResetMinageCommand implements CommandExecutor {
     private final String worldName = "minage";
@@ -15,7 +17,7 @@ public class ResetMinageCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         if (sender.hasPermission("worldreset.resetminage")) {
-            //WorldReset.resetWorld(worldName);
+            WorldReset.resetWorld(worldName);
             SQLiteCore db = new SQLiteCore();
             db.ConnectDB(dbPath);
             if (!db.ConnectDB(dbPath)) {

@@ -9,7 +9,8 @@ import org.jetbrains.annotations.Nullable;
 import java.sql.ResultSet;
 import java.util.concurrent.TimeUnit;
 
-import static fr.trankilium.trankiliumutilities.TrankiliumUtilities.dbPath;
+import static fr.trankilium.trankiliumutilities.Main.dbPath;
+
 
 public class WorldResetPlaceholder extends PlaceholderExpansion {
 

@@ -20,7 +20,6 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
-import static fr.trankilium.trankiliumutilities.TrankiliumUtilities.fileConfiguration;
 import static net.kyori.adventure.text.Component.text;
 
 public class RanksGUI implements InventoryHolder {
@@ -32,23 +31,23 @@ public class RanksGUI implements InventoryHolder {
         this.inventory.setItem(10, getRankItem(Material.YELLOW_TERRACOTTA,
                 "§e§lDivin",
                 false,
-                fileConfiguration.getInt("ranks.gui.price.divin"),
+                new RankFile().getInt("ranks.gui.price.divin"),
                 player));
         this.inventory.setItem(12, getRankItem(Material.BLUE_TERRACOTTA,
                 "§9§lCeleste",
                 false,
-                fileConfiguration.getInt("ranks.gui.price.celeste"),
+                new RankFile().getInt("ranks.gui.price.celeste"),
                 player));
 
         this.inventory.setItem(14, getRankItem(Material.RED_TERRACOTTA,
                 "§c§lTranscendant",
                 false,
-                fileConfiguration.getInt("ranks.gui.price.transcendant"),
+                new RankFile().getInt("ranks.gui.price.transcendant"),
                 player));
         this.inventory.setItem(16, getRankItem(Material.GOLD_BLOCK,
                 "§6§lVIP",
                 true,
-                fileConfiguration.getInt("ranks.gui.price.vip"),
+                new RankFile().getInt("ranks.gui.price.vip"),
                 player));
     }
     @Override
@@ -71,9 +70,9 @@ public class RanksGUI implements InventoryHolder {
             lore.add(text("§7juste à gauche d'ici.").decoration(TextDecoration.ITALIC, false));
             lore.add(text(" ").decoration(TextDecoration.ITALIC, false));
             if (player.hasPermission("group.vip")) {
-                int discountedPrice = (int) (price * (1 - fileConfiguration.getDouble("ranks.gui.vip-discount") / 100));
+                int discountedPrice = (int) (price * (1 - new RankFile().getDouble("ranks.gui.vip-discount") / 100));
                 lore.add(text(String.format("§7Prix : §c§m%s ⛃§r §a%s ⛃", price, discountedPrice)).decoration(TextDecoration.ITALIC, false));
-                    lore.add(text(String.format("§8-%d%% avec le grade VIP", fileConfiguration.getInt("ranks.gui.vip-discount"))).decoration(TextDecoration.ITALIC, false));
+                    lore.add(text(String.format("§8-%d%% avec le grade VIP", new RankFile().getInt("ranks.gui.vip-discount"))).decoration(TextDecoration.ITALIC, false));
             } else {
                 lore.add(text(String.format("§7Prix : §a%s ⛃", price)).decoration(TextDecoration.ITALIC, false));
             }
@@ -85,7 +84,7 @@ public class RanksGUI implements InventoryHolder {
             lore.add(text("§7et d'assurer sa pérénité.").decoration(TextDecoration.ITALIC, false));
             lore.add(text(" ").decoration(TextDecoration.ITALIC, false));
             DecimalFormat decimalFormat = new DecimalFormat("#.##");
-            lore.add(text(String.format("§7Prix : §a%s€", decimalFormat.format(fileConfiguration.getDouble("ranks.gui.price.vip")))).decoration(TextDecoration.ITALIC, false));
+            lore.add(text(String.format("§7Prix : §a%s€", decimalFormat.format(new RankFile().getDouble("ranks.gui.price.vip")))).decoration(TextDecoration.ITALIC, false));
             lore.add(text("§8Tu as déjà le grade VIP. Merci !").decoration(TextDecoration.ITALIC, false));
             lore.add(text(" ").decoration(TextDecoration.ITALIC, false));
             lore.add(text("§e[Lien de la Boutique]").decoration(TextDecoration.ITALIC, false));
@@ -95,7 +94,6 @@ public class RanksGUI implements InventoryHolder {
         item.setItemMeta(meta);
         return item;
     }
-
 
     public static void onClick(InventoryClickEvent event) {
         event.setCancelled(true);

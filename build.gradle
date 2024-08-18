@@ -29,6 +29,6 @@ java {
     toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 }
 
-sourceCompatibility = targetCompatibility = '21'
+targetCompatibility = '21'
 compileJava.options.encoding = 'UTF-8'
 setLibsDirName('../server/plugins')

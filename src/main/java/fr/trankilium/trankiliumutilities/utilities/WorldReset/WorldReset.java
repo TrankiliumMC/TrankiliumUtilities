@@ -5,7 +5,8 @@ import com.onarandombox.MultiverseCore.api.MVWorldManager;
 import fr.trankilium.trankiliumutilities.globalUtils.SQLiteCore;
 import org.bukkit.Bukkit;
 
-import static fr.trankilium.trankiliumutilities.TrankiliumUtilities.*;
+import static fr.trankilium.trankiliumutilities.Main.dbPath;
+import static fr.trankilium.trankiliumutilities.Main.logger;
 
 
 public class WorldReset {
@@ -25,6 +26,5 @@ public class WorldReset {
         } else {
             logger.severe(String.format("Unable to reset world '%s'. MultiverseCore not found.", worldName));
         }
-
     }
 }

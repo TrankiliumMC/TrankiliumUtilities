@@ -1,6 +1,6 @@
 name: TrankiliumUtilities
 version: '${version}'
-main: fr.trankilium.trankiliumutilities.TrankiliumUtilities
+main: fr.trankilium.trankiliumutilities.Main
 api-version: '1.21'
 depend: [Multiverse-Core, PlaceholderAPI]
 commands:
@@ -13,3 +13,9 @@ commands:
     description: Ouvre le GUI des grades pour le joueur spécifié.
     usage: /ranksgui <joueur>
     permission: op
+  shop:
+    aliases:
+      - shops
+      - market
+    description: ouvre le Shop
+    usage: /shop
