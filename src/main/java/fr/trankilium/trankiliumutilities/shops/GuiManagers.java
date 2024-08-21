@@ -27,7 +27,7 @@ import java.util.Objects;
 public class GuiManagers {
 
     public GuiManagers() {
-        new ShopGui();
+        //new ShopGui();
         new CustomGui();
     }
 
@@ -281,62 +281,57 @@ public class GuiManagers {
         }
 
         private void setDefaultShopConfig() {
-            String invname = "§6§lObject Gratuis";
-            int slots = 2 * 9;
+            String invname = "§6§lItems Gratuits";
+            int slots = 9;
             inv = Bukkit.createInventory(this, slots, invname);
 
             freeItemConfig = new YamlConfiguration();
             freeItemConfig.set("inventory.name", convertColorsToConfigFormat(invname));
             freeItemConfig.set("inventory.size", slots);
 
-            ItemStack dirt = new ItemBuilder(Material.DIRT).setName("§aTerre").setLore(
-                    Component.text(" "),
-                    Component.text("  §7Clic gauche: pour acheter 1 terre"),
-                    Component.text("  §7Clic droit: pour acheter 64 terres"),
+            ItemStack dirt = new ItemBuilder(Material.DIRT).setName("§eTerre").setLore(
+                    Component.text("  §7Clic gauche pour recevoir 1 terre"),
+                    Component.text("  §7Clic droit pour recevoir 64 terres"),
                     Component.text(" ")
             ).toItemStack();
 
-            ItemStack cobble = new ItemBuilder(Material.COBBLESTONE).setName("§aPierre").setLore(
-                    Component.text(" "),
-                    Component.text("  §7Clic gauche: pour acheter 1 pierre"),
-                    Component.text("  §7Clic droit: pour acheter 64 pierres"),
+            ItemStack cobble = new ItemBuilder(Material.COBBLESTONE).setName("§ePierre").setLore(
+                    Component.text("  §7Clic gauche pour recevoir 1 pierre"),
+                    Component.text("  §7Clic droit pour recevoir 64 pierres"),
                     Component.text(" ")
             ).toItemStack();
 
-            ItemStack sand = new ItemBuilder(Material.SAND).setName("§aSable").setLore(
-                    Component.text(" "),
-                    Component.text("  §7Clic gauche: pour acheter 1 sable"),
-                    Component.text("  §7Clic droit: pour acheter 64 sables"),
+            ItemStack sand = new ItemBuilder(Material.SAND).setName("§eSable").setLore(
+                    Component.text("  §7Clic gauche pour recevoir 1 sable"),
+                    Component.text("  §7Clic droit pour recevoir 64 sables"),
                     Component.text(" ")
             ).toItemStack();
 
-            ItemStack echaf = new ItemBuilder(Material.SCAFFOLDING).setName("§aÉchaffaudage").setLore(
-                    Component.text(" "),
-                    Component.text("  §7Clic gauche: pour acheter 1 échaffaudage"),
-                    Component.text("  §7Clic droit: pour acheter 64 échaffaudages"),
+            ItemStack echaf = new ItemBuilder(Material.SCAFFOLDING).setName("§eÉchaffaudage").setLore(
+                    Component.text("  §7Clic gauche pour recevoir 1 échaffaudage"),
+                    Component.text("  §7Clic droit pour recevoir 64 échaffaudages"),
                     Component.text(" ")
             ).toItemStack();
 
-            ItemStack torche = new ItemBuilder(Material.TORCH).setName("§aTorche").setLore(
-                    Component.text(" "),
-                    Component.text("  §7Clic gauche: pour acheter 1 torche"),
-                    Component.text("  §7Clic droit: pour acheter 64 torches"),
+            ItemStack torche = new ItemBuilder(Material.TORCH).setName("§eTorche").setLore(
+                    Component.text("  §8§7Clic gauche §7pour recevoir 1 torche"),
+                    Component.text("  §8§7Clic droit §7pour recevoir 64 torches"),
                     Component.text(" ")
             ).toItemStack();
 
             fillEmptySlots();
 
-            inv.setItem(0, dirt);
-            inv.setItem(1, cobble);
-            inv.setItem(2, sand);
-            inv.setItem(3, echaf);
-            inv.setItem(4, torche);
+            inv.setItem(2, dirt);
+            inv.setItem(3, cobble);
+            inv.setItem(4, sand);
+            inv.setItem(5, echaf);
+            inv.setItem(6, torche);
 
-            saveItemToConfig(0, dirt);
-            saveItemToConfig(1, cobble);
-            saveItemToConfig(2, sand);
-            saveItemToConfig(3, echaf);
-            saveItemToConfig(4, torche);
+            saveItemToConfig(2, dirt);
+            saveItemToConfig(3, cobble);
+            saveItemToConfig(4, sand);
+            saveItemToConfig(5, echaf);
+            saveItemToConfig(6, torche);
             saveFiles();
         }
 
@@ -468,20 +463,18 @@ public class GuiManagers {
                                     String formattedName = formatMaterialName(material.name());
 
                                     if (excessItems.isEmpty()) {
-                                        p.sendMessage("§7[§6§lTKShop§7] §ex" + amount + " §b" + formattedName);
+                                        p.sendMessage("§6§l[Shop] §ax" + amount + " §a" + formattedName);
                                     } else {
-                                        p.sendMessage("§7[§6§lTKShop§7] §6Votre inventaire est plein.");
+                                        p.sendMessage("§6§l[Shop] §6Ton inventaire est plein.");
                                     }
                                 } else {
                                     Main.getInstance().getLogger().warning("Matériel invalide: " + materialName);
-                                    p.sendMessage("§7[§6§lTKShop§7] §cMatériel invalide: " + materialName);
                                 }
                             } else {
-                                p.sendMessage("§7[§6§lTKShop§7] §cVous n'avez pas la permission de recevoir cet item.");
+                                p.sendMessage("§6§l[Shop] §cTu n'as pas la permission de recevoir cet item.");
                             }
                         }
                         break;
-
                     default:
                         Main.getInstance().getLogger().warning("Erreur action non reconnue: " + action);
                         break;

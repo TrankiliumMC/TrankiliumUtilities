@@ -14,8 +14,7 @@ commands:
     usage: /ranksgui <joueur>
     permission: op
   shop:
+    description: ouvre le Shop
     aliases:
       - shops
       - market
-    description: ouvre le Shop
-    usage: /shop

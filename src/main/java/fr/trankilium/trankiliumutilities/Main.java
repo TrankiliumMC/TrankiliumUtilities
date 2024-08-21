@@ -10,7 +10,6 @@ import fr.trankilium.trankiliumutilities.utilities.WorldReset.ResetMinageCommand
 import fr.trankilium.trankiliumutilities.utilities.WorldReset.WorldResetPlaceholder;
 import fr.trankilium.trankiliumutilities.utilities.ranks.gui.RanksGUICommand;
 import org.bukkit.Bukkit;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
@@ -29,7 +28,7 @@ public final class Main extends JavaPlugin {
         instance = this;
         logger = getLogger();
 
-        datafolder = new File("plugins/Trankilium/" + getName());
+        datafolder = new File("plugins/" + getName());
         if (!datafolder.exists()) {
             if (datafolder.mkdirs()) {
                 getLogger().info("Dossier créé avec succès : " + datafolder.getAbsolutePath());

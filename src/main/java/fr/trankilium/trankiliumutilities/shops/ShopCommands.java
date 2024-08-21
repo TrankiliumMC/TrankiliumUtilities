@@ -11,8 +11,12 @@ public class ShopCommands implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
         if (sender instanceof Player player) {
-            Inventory inv = new GuiManagers.ShopGui().getInventory();
-            player.openInventory(inv);
+            if(player.hasPermission("shoptk.use")) {
+                Inventory inv = new GuiManagers.CustomGui().getInventory();
+                player.openInventory(inv);
+            } else {
+                player.sendMessage("§cTu n'as pas la permission d'utilisé le Shop.");
+            }
         }
         return false;
     }

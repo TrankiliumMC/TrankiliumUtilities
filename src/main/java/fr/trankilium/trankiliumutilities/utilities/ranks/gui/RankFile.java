@@ -1,7 +1,6 @@
 package fr.trankilium.trankiliumutilities.utilities.ranks.gui;
 
 import fr.trankilium.trankiliumutilities.Main;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -9,7 +8,6 @@ import java.io.IOException;
 
 public class RankFile {
 
-    private FileConfiguration config;
     private final File file;
 
     public RankFile() {

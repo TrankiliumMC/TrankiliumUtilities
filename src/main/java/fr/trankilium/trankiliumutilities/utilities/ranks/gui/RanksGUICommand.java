@@ -15,7 +15,6 @@ public class RanksGUICommand implements CommandExecutor {
             if (args.length == 1) {
                 Player target = Bukkit.getPlayer(args[0]);
                 if (target != null && target.isOnline()) {
-                    // Ouvre le GUI pour le joueur spécifié
                     RanksGUI gui = new RanksGUI(target);
                     target.openInventory(gui.getInventory());
                     return true;
