@@ -16,17 +16,22 @@ public class WorldResetPlaceholder extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getIdentifier() {
-        return "trankiliumutilities";
+        return "worldreset";
     }
 
     @Override
     public @NotNull String getAuthor() {
-        return "Trankilium  ";
+        return "Trankilium";
     }
 
     @Override
     public @NotNull String getVersion() {
         return "1.0";
+    }
+
+    @Override
+    public boolean persist() {
+        return true; //
     }
 
     @Override
@@ -46,7 +51,7 @@ public class WorldResetPlaceholder extends PlaceholderExpansion {
             if (years > 0) {
                 return String.format("%d ans et %d mois", years, months);
             } else if (months > 0) {
-                return String.format("%d mois et %d days", months, days);
+                return String.format("%d mois et %d jours", months, days);
             } else if (days > 0) {
                 return String.format("%d jours et %d heures", days, hours);
             } else if (hours > 0) {

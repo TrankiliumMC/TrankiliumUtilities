@@ -4,8 +4,12 @@ import fr.trankilium.trankiliumutilities.events.InventoryClickEventHandler;
 import fr.trankilium.trankiliumutilities.events.PlayerJoinEventHandler;
 import fr.trankilium.trankiliumutilities.events.PlayerQuitEventHandler;
 import fr.trankilium.trankiliumutilities.globalUtils.SQLiteCore;
-import fr.trankilium.trankiliumutilities.shops.GuiManagers;
-import fr.trankilium.trankiliumutilities.shops.ShopCommands;
+import fr.trankilium.trankiliumutilities.utilities.rubis.RubisAdminCommand;
+import fr.trankilium.trankiliumutilities.utilities.rubis.RubisCommand;
+import fr.trankilium.trankiliumutilities.utilities.rubis.RubisGUICommand;
+import fr.trankilium.trankiliumutilities.utilities.rubis.RubisPlaceholder;
+import fr.trankilium.trankiliumutilities.utilities.shops.GuiManagers;
+import fr.trankilium.trankiliumutilities.utilities.shops.ShopCommands;
 import fr.trankilium.trankiliumutilities.utilities.WorldReset.ResetMinageCommand;
 import fr.trankilium.trankiliumutilities.utilities.WorldReset.WorldResetPlaceholder;
 import fr.trankilium.trankiliumutilities.utilities.ranks.gui.RanksGUICommand;
@@ -44,12 +48,21 @@ public final class Main extends JavaPlugin {
 
         // Tables creation
 
+        // Rubis
+        db.Exec("CREATE TABLE IF NOT EXISTS rubis ("
+                + "id INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + "player VARCHAR(255) NOT NULL UNIQUE,"
+                + "balance INTEGER NOT NULL DEFAULT 0,"
+                + "claims_amount INTEGER NOT NULL DEFAULT 0"
+                + ");");
+
         // WorldReset
         db.Exec("CREATE TABLE IF NOT EXISTS worldreset ("
                 + "Id INTEGER PRIMARY KEY AUTOINCREMENT,"
                 + "World VARCHAR(255) NOT NULL UNIQUE,"
                 + "LastReset INTEGER NOT NULL DEFAULT 0"
                 + ");");
+
         db.DisconnectDB();
 
         new GuiManagers();
@@ -58,6 +71,9 @@ public final class Main extends JavaPlugin {
         Objects.requireNonNull(getCommand("resetminage")).setExecutor(new ResetMinageCommand());
         Objects.requireNonNull(getCommand("ranksgui")).setExecutor(new RanksGUICommand());
         Objects.requireNonNull(getCommand("shop")).setExecutor(new ShopCommands());
+        Objects.requireNonNull(getCommand("rubis")).setExecutor(new RubisCommand());
+        Objects.requireNonNull(getCommand("rubisadmin")).setExecutor(new RubisAdminCommand());
+        Objects.requireNonNull(getCommand("rubisgui")).setExecutor(new RubisGUICommand());
 
         /* Register Events */
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerJoinEventHandler(), this);
@@ -67,6 +83,10 @@ public final class Main extends JavaPlugin {
         /* Placeholders */
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new WorldResetPlaceholder().register();
+            new RubisPlaceholder().register();
+            getLogger().info("Placeholders loaded successfully");
+        } else {
+            getLogger().warning("PlaceholderAPI not found. Placeholders won't work.");
         }
     }
 

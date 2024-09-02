@@ -1,5 +1,7 @@
-package fr.trankilium.trankiliumutilities.utilities;
+package fr.trankilium.trankiliumutilities.globalUtils;
 
+import com.mojang.authlib.GameProfile;
+import com.mojang.authlib.properties.Property;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.Material;
@@ -9,10 +11,12 @@ import org.bukkit.inventory.ItemFlag;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.UUID;
 
 public class ItemBuilder {
@@ -63,6 +67,24 @@ public class ItemBuilder {
       return this;
     }
 
+    public ItemBuilder setSkullUrl(String url) {
+        SkullMeta meta = (SkullMeta) this.is.getItemMeta();
+        GameProfile profile = new GameProfile(UUID.randomUUID(), "ItemBuilder");
+
+        String encodedData = Base64.getEncoder().encodeToString(String.format("{\"textures\":{\"SKIN\":{\"url\":\"%s\"}}}", url).getBytes());
+        profile.getProperties().put("textures", new Property("textures", encodedData));
+        try {
+            Field field = meta.getClass().getDeclaredField("profile");
+            field.setAccessible(true);
+            field.set(meta, profile);
+            this.is.setItemMeta(meta);
+            return this;
+        } catch (NoSuchFieldException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
     public ItemBuilder setCustomModelData(int data) {
       ItemMeta im = this.is.getItemMeta();
       im.setCustomModelData(data);
@@ -91,6 +113,15 @@ public class ItemBuilder {
         this.is.setItemMeta((ItemMeta)im);
       } catch (ClassCastException ignored) {}
       return this;
+    }
+
+    public ItemBuilder setPotionColor(Color color) {
+        try {
+            PotionMeta im = (PotionMeta) this.is.getItemMeta();
+            im.setColor(color);
+            this.is.setItemMeta((ItemMeta)im);
+        } catch (ClassCastException ignored) {}
+        return this;
     }
 
     public ItemBuilder addFlags(ItemFlag itemflag) {

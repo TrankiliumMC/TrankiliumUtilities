@@ -19,3 +19,14 @@ commands:
       - shops
       - market
     permission: shoptk.use
+  rubis:
+    description: Affiche le nombre de rubis du joueur
+    usage: /<command>
+  rubisadmin:
+    description: Ajoute, définit ou obtient le nombre de rubis d'un joueur
+    usage: /<command> <add|set|get> <player> [amount]
+    permission: rubis.admin
+  rubisgui:
+    description: Ouvre le GUI des rubis pour le joueur spécifié.
+    usage: /<command> <player>
+    permission: op

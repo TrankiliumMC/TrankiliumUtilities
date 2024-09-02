@@ -1,7 +1,7 @@
-package fr.trankilium.trankiliumutilities.shops;
+package fr.trankilium.trankiliumutilities.utilities.shops;
 
 import fr.trankilium.trankiliumutilities.Main;
-import fr.trankilium.trankiliumutilities.utilities.ItemBuilder;
+import fr.trankilium.trankiliumutilities.globalUtils.ItemBuilder;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.serializer.gson.GsonComponentSerializer;
 import org.bukkit.Bukkit;

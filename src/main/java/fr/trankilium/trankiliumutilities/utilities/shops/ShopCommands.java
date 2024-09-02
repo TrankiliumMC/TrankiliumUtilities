@@ -1,4 +1,4 @@
-package fr.trankilium.trankiliumutilities.shops;
+package fr.trankilium.trankiliumutilities.utilities.shops;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
